@@ -87,10 +87,10 @@ function closeHintOnBackground(event) {
     }
 }
 
-// Continue to partner
+// Continue to partner - Redirect to offer/event link
 function continueToPartner() {
-    alert('Redirecting to partner page...');
-    // window.location.href = 'https://example.com/partner';
+    // Redirect to the unlock-content partner page
+    window.location.href = 'https://unlock-content.site/sl/65pd8';
 }
 
 // Play overlay click to play video
