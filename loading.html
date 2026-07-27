@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA6 — Loading Experience</title>
+    <meta name="description" content="Loading GTA6 experience.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --luxury-pink: #e0115f;
+            --luxury-orange: #ff6b35;
+            --navy: #0a1628;
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            min-height: 100vh;
+            background: url('load.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 22, 40, 0.475);
+        }
+
+        .loading-container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .loading-logo {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .loading-logo span {
+            color: var(--luxury-pink);
+        }
+
+        .loading-title {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            letter-spacing: 0.4em;
+            color: var(--luxury-orange);
+            margin-bottom: 4rem;
+            text-transform: uppercase;
+        }
+
+        .loading-bar-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .loading-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--luxury-pink), var(--luxury-orange));
+            box-shadow: 0 0 10px rgba(224, 17, 95, 0.5);
+            transition: width 0.3s ease;
+        }
+
+        .loading-text {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            min-height: 1.5em;
+        }
+
+        .loading-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 0.1em;
+        }
+
+        /* Particle effect */
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--luxury-pink);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 4s infinite;
+            box-shadow: 0 0 6px var(--luxury-pink);
+        }
+
+        @keyframes float {
+            0% { opacity: 0; transform: translateY(100vh); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-100vh); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading-container">
+        <div class="loading-logo">GTA<span>6</span></div>
+        <div class="loading-title">INITIALIZING EXPERIENCE</div>
+        
+        <div class="loading-bar-container">
+            <div class="loading-bar" id="load-bar"></div>
+        </div>
+        
+        <div class="loading-text" id="load-msg">Loading city...</div>
+        <div class="loading-stats">
+            <span>LOADING ASSETS</span>
+            <span id="load-percent">0%</span>
+        </div>
+    </div>
+
+    <script>
+        // Create particles
+        for (let i = 0; i < 30; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDelay = Math.random() * 5 + 's';
+            p.style.animationDuration = (4 + Math.random() * 4) + 's';
+            document.body.appendChild(p);
+        }
+
+        // Loading sequence
+        const bar = document.getElementById('load-bar');
+        const msg = document.getElementById('load-msg');
+        const percent = document.getElementById('load-percent');
+        
+        const messages = ['Loading city...', 'Connecting...', 'Initializing systems...', 'Almost ready...'];
+        let progress = 0;
+        let msgIdx = 0;
+        
+        const msgInterval = setInterval(() => {
+            msgIdx = (msgIdx + 1) % messages.length;
+            msg.textContent = messages[msgIdx];
+        }, 1200);
+        
+        const loadInterval = setInterval(() => {
+            progress += Math.random() * 8 + 5;
+            
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(loadInterval);
+                clearInterval(msgInterval);
+                percent.textContent = '100%';
+                
+                // Redirect to main page
+                setTimeout(() => {
+                    window.location.href = 'main.html';
+                }, 800);
+            } else {
+                bar.style.width = progress + '%';
+                percent.textContent = Math.floor(progress) + '%';
+            }
+        }, 150);
+    </script>
+
+</body>
+</html>
