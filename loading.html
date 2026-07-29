@@ -7,7 +7,7 @@
     <meta name="description" content="Loading GTA6 experience.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Righteous&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -20,7 +20,6 @@
             --luxury-orange: #ff6b35;
             --navy: #0a1628;
             --font-display: 'Bebas Neue', sans-serif;
-            --font-gta: 'Righteous', sans-serif;
             --font-body: 'Montserrat', sans-serif;
         }
 
@@ -51,27 +50,15 @@
         }
 
         .loading-logo {
-            font-family: var(--font-gta);
-            font-size: 5.5rem;
+            font-family: var(--font-display);
+            font-size: 5rem;
             color: #fff;
             margin-bottom: 0.5rem;
-            letter-spacing: 0.15em;
-            text-shadow: 
-                0 0 30px rgba(224, 17, 95, 0.6),
-                0 0 60px rgba(255, 107, 53, 0.3),
-                3px 3px 0px #000;
-            font-weight: 900;
-            text-transform: uppercase;
-            animation: glow-load 3s ease-in-out infinite;
+            letter-spacing: 0.1em;
         }
 
         .loading-logo span {
             color: var(--luxury-pink);
-        }
-
-        @keyframes glow-load {
-            0%, 100% { text-shadow: 0 0 30px rgba(224, 17, 95, 0.6), 0 0 60px rgba(255, 107, 53, 0.3), 3px 3px 0px #000; }
-            50% { text-shadow: 0 0 40px rgba(224, 17, 95, 0.8), 0 0 80px rgba(255, 107, 53, 0.5), 3px 3px 0px #000; }
         }
 
         .loading-title {
@@ -81,7 +68,6 @@
             color: var(--luxury-orange);
             margin-bottom: 4rem;
             text-transform: uppercase;
-            font-weight: 600;
         }
 
         .loading-bar-container {
@@ -92,7 +78,6 @@
             position: relative;
             overflow: hidden;
             border-radius: 2px;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .loading-bar {
@@ -110,12 +95,6 @@
             letter-spacing: 0.2em;
             text-transform: uppercase;
             min-height: 1.5em;
-            animation: pulse-text 1.2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-text {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
         }
 
         .loading-stats {
@@ -149,7 +128,7 @@
 <body>
 
     <div class="loading-container">
-        <div class="loading-logo">GTA<span>6</span></div>
+        <div class="loading-logo">GTA<span>VI</span></div>
         <div class="loading-title">INITIALIZING EXPERIENCE</div>
         
         <div class="loading-bar-container">
@@ -189,24 +168,23 @@
         }, 1200);
         
         const loadInterval = setInterval(() => {
-            progress += Math.random() * 2.5 + 1; // Slower progression for 10 seconds
+            progress += Math.random() * 2.5 + 1; // Slower for 10 seconds
             
             if (progress >= 100) {
                 progress = 100;
                 clearInterval(loadInterval);
                 clearInterval(msgInterval);
                 percent.textContent = '100%';
-                msg.textContent = 'Ready...';
                 
-                // Redirect to main page after 10 seconds total
+                // Redirect to main page after 10 seconds
                 setTimeout(() => {
                     window.location.href = 'main.html';
-                }, 500);
+                }, 800);
             } else {
                 bar.style.width = progress + '%';
                 percent.textContent = Math.floor(progress) + '%';
             }
-        }, 300); // Adjusted interval for 10 second total load time
+        }, 300);
     </script>
 
 </body>
