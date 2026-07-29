@@ -7,7 +7,7 @@
     <meta name="description" content="Register for GTA6 Deluxe Edition access. Limited availability.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Righteous&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -20,6 +20,7 @@
             --luxury-orange: #ff6b35;
             --navy: #0a1628;
             --font-display: 'Bebas Neue', sans-serif;
+            --font-gta: 'Righteous', sans-serif;
             --font-body: 'Montserrat', sans-serif;
             --font-serif: 'Playfair Display', serif;
         }
@@ -48,10 +49,11 @@
             width: 90%;
             max-width: 480px;
             padding: 3.5rem;
-            background: rgba(17, 17, 24, 0.95);
-            border: 1px solid rgba(224, 17, 95, 0.3);
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8);
+            background: linear-gradient(135deg, rgba(17, 17, 24, 0.95) 0%, rgba(26, 42, 66, 0.6) 100%);
+            border: 2px solid rgba(224, 17, 95, 0.4);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(224, 17, 95, 0.2), inset 0 0 40px rgba(224, 17, 95, 0.05);
             animation: slideUp 0.6s ease;
+            backdrop-filter: blur(15px);
         }
 
         @keyframes slideUp {
@@ -59,41 +61,57 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .logo-mark {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1rem;
-            background: linear-gradient(135deg, var(--luxury-pink), var(--luxury-orange));
-            color: #fff;
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-size: 3.5rem;
-            color: #fff;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
+        .logo-section {
             text-align: center;
+            margin-bottom: 2.5rem;
         }
 
-        .logo span {
+        .premium-logo {
+            font-family: var(--font-gta);
+            font-size: 4.5rem;
+            color: #fff;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+            text-shadow: 
+                0 0 30px rgba(224, 17, 95, 0.6),
+                0 0 60px rgba(255, 107, 53, 0.3),
+                3px 3px 0px #000;
+            font-weight: 900;
+            text-transform: uppercase;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        .premium-logo span {
             color: var(--luxury-pink);
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 30px rgba(224, 17, 95, 0.6), 0 0 60px rgba(255, 107, 53, 0.3), 3px 3px 0px #000; }
+            50% { text-shadow: 0 0 40px rgba(224, 17, 95, 0.8), 0 0 80px rgba(255, 107, 53, 0.5), 3px 3px 0px #000; }
+        }
+
+        .logo-badge {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background: rgba(224, 17, 95, 0.2);
+            border: 1px solid rgba(224, 17, 95, 0.5);
+            color: var(--luxury-orange);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-weight: 700;
         }
 
         .tagline {
             font-family: var(--font-serif);
             font-style: italic;
-            color: var(--luxury-orange);
-            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
             margin-bottom: 2.5rem;
             letter-spacing: 0.05em;
             text-align: center;
+            line-height: 1.6;
         }
 
         .input-group {
@@ -121,11 +139,17 @@
             font-family: var(--font-body);
             transition: all 0.3s ease;
             outline: none;
+            backdrop-filter: blur(10px);
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
         }
 
         .input-group input:focus {
             border-color: var(--luxury-pink);
-            background: rgba(224, 17, 95, 0.05);
+            background: rgba(224, 17, 95, 0.1);
+            box-shadow: 0 0 20px rgba(224, 17, 95, 0.2);
         }
 
         .luxury-btn {
@@ -144,11 +168,25 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 0 20px rgba(224, 17, 95, 0.3);
+        }
+
+        .luxury-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .luxury-btn:hover:not(:disabled)::before {
+            transform: translateX(100%);
         }
 
         .luxury-btn:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(224, 17, 95, 0.4);
+            box-shadow: 0 15px 40px rgba(224, 17, 95, 0.5);
         }
 
         .luxury-btn:disabled {
@@ -170,16 +208,18 @@
 
         @media (max-width: 480px) {
             .register-container { padding: 2.5rem 1.5rem; }
-            .logo { font-size: 2.5rem; }
+            .premium-logo { font-size: 3.5rem; }
         }
     </style>
 </head>
 <body>
 
     <div class="register-container">
-        <div class="logo-mark">🌇</div>
-        <div class="logo">GTA<span>VI</span></div>
-        <div class="tagline">The Next Generation Open-World Experience</div>
+        <div class="logo-section">
+            <div class="logo-badge">EXCLUSIVE ACCESS</div>
+            <div class="premium-logo">GTA<span>VI</span></div>
+        </div>
+        <div class="tagline">Claim your Deluxe Edition and step into the next generation of open-world gaming</div>
         
         <form id="register-form" action="loading.html" method="GET">
             <div class="input-group">
@@ -195,7 +235,7 @@
             </button>
         </form>
         <div class="secure-note">
-            <span></span> Secure SSL Encryption
+            <span>🔒</span> Secure SSL Encryption
         </div>
     </div>
 
