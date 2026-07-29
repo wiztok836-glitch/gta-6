@@ -58,13 +58,17 @@ function verifyAccess() {
     const correctCode = 'GTA6-LAUNCH';
     
     if (accessCode === correctCode) {
+        // Hide form and show popup after 5 seconds
         document.getElementById('access-form').style.display = 'none';
-        document.getElementById('access-success').classList.add('active');
         
-        // Redirect after 3 seconds
         setTimeout(() => {
-            window.location.href = '#notice';
-        }, 3000);
+            document.getElementById('access-success').classList.add('active');
+            
+            // Redirect after success message
+            setTimeout(() => {
+                window.location.href = '#notice';
+            }, 3000);
+        }, 5000);
     } else {
         alert('Invalid access code. Try again!');
     }
